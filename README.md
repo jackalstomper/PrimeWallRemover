@@ -1,5 +1,5 @@
 ## Usage
-WallRemover <MREA File Path>
+`WallRemover MREA_File_Path`
 
 Mostly designed to be used in conjunction with a batch script and PakTool
 to convert the entire games collision models at once.
