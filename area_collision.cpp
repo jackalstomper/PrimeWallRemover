@@ -9,7 +9,6 @@ namespace {
 void mapCollisionIndexData(std::fstream &file)
 {
     uint32_t collision_material_count;
-    uint32_t vertex_index_count;
     file.read(reinterpret_cast<char*>(&collision_material_count), sizeof(uint32_t));
     collision_material_count = Utility::byteSwap32(collision_material_count);
 

@@ -28,7 +28,6 @@ int main(int argc, char **argv)
     // see http://www.metroid2002.com/retromodding/wiki/MREA_%28Metroid_Prime%29
     uint32_t data_section_count;
     uint32_t collision_index;
-    uint32_t collision_section_size;
     std::vector<uint32_t> data_section_sizes;
 
     file.seekg(0x3C);
