@@ -1,23 +1,26 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
-#include <string>
 #include "utility.hpp"
 #include "area_collision.hpp"
 
-int main()
+int main(int argc, char **argv)
 {
-    std::string file_name("test.MREA");
-    std::fstream file(file_name, std::ios::in | std::ios::out | std::ios::binary);
+    if (argc < 2) {
+        std::cout << "Usage: WallRemover <file_path>\n";
+        return 1;
+    }
+
+    std::fstream file(argv[1], std::ios::in | std::ios::out | std::ios::binary);
     if (!file) {
-        std::cout << "failed\n";
-        return 0;
+        std::cout << "Couldn't open file " << argv[1] << "\nAborting.\n";
+        return 1;
     }
 
     uint32_t magic;
     file.read(reinterpret_cast<char*>(&magic), sizeof(uint32_t));
     if (Utility::byteSwap32(magic) != 0xDEADBEEF) {
-        std::cout << "Invalid MREA file encountered: " << file_name << '\n';
+        std::cout << "Invalid MREA file encountered: " << argv[1] << '\n';
         return 1;
     }
 
@@ -61,7 +64,7 @@ int main()
     file.read(reinterpret_cast<char*>(&magic), sizeof(uint32_t));
     if (Utility::byteSwap32(magic) != 0x01000000) {
         // we got lost somehow and we no longer know where we are - abort!
-        std::cout << "We got lost while navigating to collision section of MREA file " << file_name << "\nAborting.\n";
+        std::cout << "We got lost while navigating to collision section of MREA file " << argv[1] << "\nAborting.\n";
         return 1;
     }
 

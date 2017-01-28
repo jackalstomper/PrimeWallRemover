@@ -15,20 +15,40 @@ void mapCollisionIndexData(std::fstream &file)
 
     // set all walls to allow player to pass through them
     // see http://www.metroid2002.com/retromodding/wiki/Collision_Index_Data_%28File_Format%29#Collision_Materials
+    bool is_wall;
+    bool is_ceiling;
+    bool is_solid;
+    bool is_floor;
+    bool is_scannable;
+    std::streampos start_of_material_props = file.tellg();
+    std::vector<uint32_t> new_material_props;
+    new_material_props.reserve(collision_material_count);
+    uint32_t i;
     uint32_t flags;
-    uint32_t is_wall = 0;
-    uint32_t is_solid = 0;
-    for (uint32_t i = 0; i < collision_material_count; ++i) {
+
+    for (i = 0; i < collision_material_count; ++i) {
         file.read(reinterpret_cast<char*>(&flags), sizeof(uint32_t));
         flags = Utility::byteSwap32(flags);
         is_wall = (flags >> 30) & 1;
-        if (is_wall) {
-            flags ^= (1 << 19);
+        is_ceiling = (flags >> 29) & 1;
+        is_solid = (flags >> 19) & 1;
+        is_floor = (flags >> 31) & 1;
+        is_scannable = (flags >> 27) & 1;
+
+        if (!is_floor && is_solid && (is_wall || is_ceiling)) {
+            flags ^= (1 << 19); // solid = false
+            if (!is_scannable)
+                flags ^= (1 << 27); // scanthrough = true
             std::cout << "Setting material " << i << " to be passthrough!\n";
-            file.seekp(static_cast<uint32_t>(file.tellg()) - sizeof(uint32_t));
-            file.write(reinterpret_cast<char*>(&flags), sizeof(uint32_t));
         }
+
+        new_material_props.push_back(Utility::byteSwap32(flags));
     }
+
+    // write new flags to file
+    file.seekp(start_of_material_props);
+    for (i = 0; i < collision_material_count; ++i)
+        file.write(reinterpret_cast<char*>(&new_material_props[i]), sizeof(uint32_t));
 }
 
 } // anon namespace
