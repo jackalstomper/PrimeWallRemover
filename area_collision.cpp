@@ -2,6 +2,7 @@
 #include "utility.hpp"
 #include <vector>
 #include <iostream>
+#include <cstdint>
 
 namespace {
 

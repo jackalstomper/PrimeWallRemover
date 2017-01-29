@@ -1,8 +1,6 @@
 #pragma once
 
-#ifdef _MSC_VER
-#   include <stdint.h>
-#endif
+#include <cstdint>
 
 namespace Utility {
 

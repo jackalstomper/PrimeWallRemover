@@ -4,6 +4,7 @@
 #include <vector>
 #include <cstring>
 #include <string>
+#include <cstdint>
 #include "utility.hpp"
 #include "area_collision.hpp"
 
