@@ -25,7 +25,7 @@ struct MreaResource
 void mapPak(const std::string &file_name)
 {
     std::cout << "Opening " << file_name << '\n';
-    std::fstream file(file_name, std::ios::in | std::ios::binary);
+    std::fstream file(file_name, std::ios::in | std::ios::out | std::ios::binary);
     if (!file)
         throw std::runtime_error("Couldn't open file " + file_name);
 
