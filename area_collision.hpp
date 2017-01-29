@@ -3,6 +3,6 @@
 
 namespace MREA {
 
-void mapCollisionSection(std::fstream &file, uint32_t root);
+void mapMrea(std::fstream &file);
 
 } // namespace MREA
