@@ -84,15 +84,8 @@ void mapPak(const std::string &file_name)
     }
 }
 
-int main(int argc, char **argv)
+int main()
 {
-    if (argc >= 2 && std::strcmp(argv[1], "help") == 0) {
-        std::cout << "Usage: WallRemover PRIME_ROOT\n"
-            << "  PRIME_ROOT is the root directory of the extracted Metroid Prime files\n"
-            << "  Example: WallRemover \"C:\\Metroid Prime [GM8E01]\\root\"\n";
-        return 1;
-    }
-
     std::string root;
     std::cout << "Enter Metroid Prime Root Directory: ";
     std::getline(std::cin, root);
