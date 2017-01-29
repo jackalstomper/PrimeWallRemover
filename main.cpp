@@ -85,7 +85,7 @@ void mapPak(const std::string &file_name)
     }
 }
 
-int main()
+int main() try
 {
     std::string root;
     std::cout << "Enter Metroid Prime Root Directory: ";
@@ -106,4 +106,9 @@ int main()
 
     std::cout << "Done!\n";
     return 0;
+} 
+catch (const std::exception &e) {
+    std::cerr << e.what() << '\n';
+    std::cerr << "Aborting.\n";
+    return 1;
 }
