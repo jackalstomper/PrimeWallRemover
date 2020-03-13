@@ -15,6 +15,8 @@
 #endif
 
 #include "nod/nod.hpp"
+#include "nod/DiscBase.hpp"
+#include "nod/DiscGCN.hpp"
 #include "prime_files/PAK.hpp"
 #include "prime_files/MREA.hpp"
 #include "WallRemover.hpp"
