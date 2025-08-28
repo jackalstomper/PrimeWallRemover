@@ -3,22 +3,22 @@ This is a mod that removes wall and ceiling collision from the game. It's less f
 
 ## Usage
 
-#### Windows
-Double click WallRemover.exe
+### Windows
+Double click `prime-wall-remover.exe`
 
-#### Linux/Mac
-Compile and run WallRemover in a terminal
+### Linux
+Execute `prime-wall-remover-linux` in a terminal
 
-See: [Compiling](#compiling)
+### Mac
+I don't have a mac machine to precompile a binary.  
+Mac users will need to compile the project temselves using cargo.  
+See `Compiling`
 
-#### Instructions
-Enter the file path to your Metroid Prime 0-00 NTSC ISO file when prompted.
+### Running the tool
+Enter the file path for your metroid Prime ISO when prompted.  
+For example `C:\GM8E01.iso`  
+Wait for the tool to complete.  
+The tool will modify the ISO file in-place, make sure you have a clean copy elsewhere.
 
-For example `C:\GM8E01.iso`
-
-The tool will ask for confirmation and then modify the ISO in-place. Make sure you have a clean backup!
-
-Once complete you can run the ISO in Dolphin or in a USB loader like nintendont.
-
-## Compiling<a name="compiling"></a>
-The tool is a standard rust project and can be compiled with `cargo build`
+## Compiling
+This is a standard rust project that can be compiled with `cargo build --release`
