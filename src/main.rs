@@ -65,7 +65,10 @@ fn main() -> io::Result<()> {
     let fst = meta.fst().expect("File system table is invalid");
     let mut mod_count = 0;
     println!("Searching for walls to remove...");
-    for (_, node, filename) in fst.iter().filter(|e| e.2.starts_with("Metroid")) {
+    for (_, node, filename) in fst
+        .iter()
+        .filter(|e| e.2.starts_with("Metroid") || e.2.starts_with("metroid"))
+    {
         let mut data = Vec::new();
         partition
             .open_file(node)
