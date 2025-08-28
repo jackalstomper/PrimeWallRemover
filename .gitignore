@@ -1,9 +1,1 @@
-Debug/
-*.filters
-*.MREA
-*.exe
-*.user
-*.cmake
-Release/
-.vs/
-build/
+target/
