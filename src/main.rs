@@ -11,6 +11,7 @@ use std::io::{self, Cursor, Read, Seek, Write};
 
 const MREA_MAGIC: u32 = 0xDEADBEEF;
 const COLLISION_MAGIC: u32 = 0xDEAFBABE;
+const BROKEN_RELAY_ADDR: u64 = 0x4CE1ABA0;
 
 // Material flag shift values
 const FLOOR: u32 = 31;
@@ -81,6 +82,12 @@ fn main() -> io::Result<()> {
             mod_count += count;
         }
     }
+    // There is a particular relay in Aeter Lab Entryway that triggers a load for East Tower
+    // Problem is Retro disabled it. Either accidentally or on purpose we'll never know.
+    // This means players need to force load the room by shooting the door with wave beam.
+    // This is no fun for routing, so lets enable that relay again.
+    outfile.seek(io::SeekFrom::Start(BROKEN_RELAY_ADDR))?;
+    outfile.write_u8(1)?;
     if mod_count == 0 {
         println!("No walls found to remove. Was this ISO already modded?");
     } else {
